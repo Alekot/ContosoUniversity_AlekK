@@ -141,9 +141,29 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202103202033580_InitialCreate.cs" />
-    <Compile Include="Migrations\202103202033580_InitialCreate.Designer.cs">
-      <DependentUpon>202103202033580_InitialCreate.cs</DependentUpon>
+    <Compile Include="Migrations\202103231447535_InitialCreate.cs" />
+    <Compile Include="Migrations\202103231447535_InitialCreate.Designer.cs">
+      <DependentUpon>202103231447535_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202103231538458_PopultDatabase.cs" />
+    <Compile Include="Migrations\202103231538458_PopultDatabase.Designer.cs">
+      <DependentUpon>202103231538458_PopultDatabase.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202103231650011_MaxLengthOnNames.cs" />
+    <Compile Include="Migrations\202103231650011_MaxLengthOnNames.Designer.cs">
+      <DependentUpon>202103231650011_MaxLengthOnNames.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202103231658199_MaxLengthOnNames30.cs" />
+    <Compile Include="Migrations\202103231658199_MaxLengthOnNames30.Designer.cs">
+      <DependentUpon>202103231658199_MaxLengthOnNames30.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202103231711328_MaxLengthOnNamesReverted.cs" />
+    <Compile Include="Migrations\202103231711328_MaxLengthOnNamesReverted.Designer.cs">
+      <DependentUpon>202103231711328_MaxLengthOnNamesReverted.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202103231713164_ColumnFirstName.cs" />
+    <Compile Include="Migrations\202103231713164_ColumnFirstName.Designer.cs">
+      <DependentUpon>202103231713164_ColumnFirstName.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Course.cs" />
@@ -213,8 +233,23 @@
     <Content Include="Scripts\jquery-3.4.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202103202033580_InitialCreate.resx">
-      <DependentUpon>202103202033580_InitialCreate.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202103231447535_InitialCreate.resx">
+      <DependentUpon>202103231447535_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202103231538458_PopultDatabase.resx">
+      <DependentUpon>202103231538458_PopultDatabase.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202103231650011_MaxLengthOnNames.resx">
+      <DependentUpon>202103231650011_MaxLengthOnNames.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202103231658199_MaxLengthOnNames30.resx">
+      <DependentUpon>202103231658199_MaxLengthOnNames30.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202103231711328_MaxLengthOnNamesReverted.resx">
+      <DependentUpon>202103231711328_MaxLengthOnNamesReverted.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202103231713164_ColumnFirstName.resx">
+      <DependentUpon>202103231713164_ColumnFirstName.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

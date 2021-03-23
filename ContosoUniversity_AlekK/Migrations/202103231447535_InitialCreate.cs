@@ -8,15 +8,14 @@ namespace ContosoUniversity_AlekK.Migrations
         public override void Up()
         {
             CreateTable(
-                "dbo.Student",
+                "dbo.Course",
                 c => new
                     {
-                        StudentID = c.Int(nullable: false, identity: true),
-                        LastName = c.String(),
-                        FirstMidName = c.String(),
-                        EnrollmentDate = c.DateTime(nullable: false),
+                        CourseID = c.Int(nullable: false),
+                        Title = c.String(),
+                        Credits = c.Int(nullable: false),
                     })
-                .PrimaryKey(t => t.StudentID);
+                .PrimaryKey(t => t.CourseID);
             
             CreateTable(
                 "dbo.Enrollment",
@@ -34,26 +33,27 @@ namespace ContosoUniversity_AlekK.Migrations
                 .Index(t => t.StudentID);
             
             CreateTable(
-                "dbo.Course",
+                "dbo.Student",
                 c => new
                     {
-                        CourseID = c.Int(nullable: false),
-                        Title = c.String(),
-                        Credits = c.Int(nullable: false),
+                        StudentID = c.Int(nullable: false, identity: true),
+                        LastName = c.String(),
+                        FirstMidName = c.String(),
+                        EnrollmentDate = c.DateTime(nullable: false),
                     })
-                .PrimaryKey(t => t.CourseID);
+                .PrimaryKey(t => t.StudentID);
             
         }
         
         public override void Down()
         {
-            DropIndex("dbo.Enrollment", new[] { "StudentID" });
-            DropIndex("dbo.Enrollment", new[] { "CourseID" });
             DropForeignKey("dbo.Enrollment", "StudentID", "dbo.Student");
             DropForeignKey("dbo.Enrollment", "CourseID", "dbo.Course");
-            DropTable("dbo.Course");
-            DropTable("dbo.Enrollment");
+            DropIndex("dbo.Enrollment", new[] { "StudentID" });
+            DropIndex("dbo.Enrollment", new[] { "CourseID" });
             DropTable("dbo.Student");
+            DropTable("dbo.Enrollment");
+            DropTable("dbo.Course");
         }
     }
 }
