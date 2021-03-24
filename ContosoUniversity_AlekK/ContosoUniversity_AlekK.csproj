@@ -141,10 +141,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202103231447535_InitialCreate.cs" />
-    <Compile Include="Migrations\202103231447535_InitialCreate.Designer.cs">
-      <DependentUpon>202103231447535_InitialCreate.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\202103231538458_PopultDatabase.cs" />
     <Compile Include="Migrations\202103231538458_PopultDatabase.Designer.cs">
       <DependentUpon>202103231538458_PopultDatabase.cs</DependentUpon>
@@ -165,10 +161,21 @@
     <Compile Include="Migrations\202103231713164_ColumnFirstName.Designer.cs">
       <DependentUpon>202103231713164_ColumnFirstName.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202103241948170_ComplexDataModel.cs" />
+    <Compile Include="Migrations\202103241948170_ComplexDataModel.Designer.cs">
+      <DependentUpon>202103241948170_ComplexDataModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202103242013328_ComplexDataModel_2.cs" />
+    <Compile Include="Migrations\202103242013328_ComplexDataModel_2.Designer.cs">
+      <DependentUpon>202103242013328_ComplexDataModel_2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Course.cs" />
+    <Compile Include="Models\Department.cs" />
     <Compile Include="Models\Enrollment.cs" />
     <Compile Include="Models\Enums\Grade.cs" />
+    <Compile Include="Models\Instructor.cs" />
+    <Compile Include="Models\OfficeAssignment.cs" />
     <Compile Include="Models\Student.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\EnrollmentDateGroup.cs" />
@@ -233,9 +240,6 @@
     <Content Include="Scripts\jquery-3.4.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202103231447535_InitialCreate.resx">
-      <DependentUpon>202103231447535_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202103231538458_PopultDatabase.resx">
       <DependentUpon>202103231538458_PopultDatabase.cs</DependentUpon>
     </EmbeddedResource>
@@ -250,6 +254,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202103231713164_ColumnFirstName.resx">
       <DependentUpon>202103231713164_ColumnFirstName.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202103241948170_ComplexDataModel.resx">
+      <DependentUpon>202103241948170_ComplexDataModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202103242013328_ComplexDataModel_2.resx">
+      <DependentUpon>202103242013328_ComplexDataModel_2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
