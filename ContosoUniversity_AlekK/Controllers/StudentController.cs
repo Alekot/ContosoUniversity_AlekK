@@ -180,7 +180,7 @@ namespace ContosoUniversity_AlekK.Controllers
             try
             {
                 //Student student = db.Students.Find(id);
-                Student student = new Student { StudentID = id };
+                Student student = new Student { ID = id };
                 //db.Students.Remove(student);
                 db.Entry(student).State = EntityState.Deleted;
                 db.SaveChanges();

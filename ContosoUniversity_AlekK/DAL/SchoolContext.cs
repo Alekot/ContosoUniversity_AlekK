@@ -10,6 +10,7 @@ namespace ContosoUniversity_AlekK.DAL
 {
     public class SchoolContext : DbContext
     {
+        public DbSet<Person> People { get; set; }
         public DbSet<Student> Students { get; set; }
         public DbSet<Course> Courses { get; set; }
         public DbSet<Enrollment> Enrollments { get; set; }

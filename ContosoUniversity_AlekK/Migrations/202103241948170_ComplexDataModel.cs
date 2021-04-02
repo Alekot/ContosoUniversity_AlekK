@@ -98,7 +98,7 @@ namespace ContosoUniversity_AlekK.Migrations
             // Create  a department for course to point to.
             Sql("INSERT INTO dbo.Department (Name, Budget, StartDate) VALUES ('Temp', 0.00, GETDATE())");
             //  default value for FK points to department created above.
-            AddColumn("dbo.Course", "DepartmentID", c => c.Int(nullable: false, defaultValue: 1));
+            //AddColumn("dbo.Course", "DepartmentID", c => c.Int(nullable: false, defaultValue: 1));
             //AddColumn("dbo.Course", "DepartmentID", c => c.Int(nullable: false));
 
         }

@@ -172,6 +172,10 @@
     <Compile Include="Migrations\202103242013328_ComplexDataModel_2.Designer.cs">
       <DependentUpon>202103242013328_ComplexDataModel_2.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202104021139008_Inheritance.cs" />
+    <Compile Include="Migrations\202104021139008_Inheritance.Designer.cs">
+      <DependentUpon>202104021139008_Inheritance.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Course.cs" />
     <Compile Include="Models\Department.cs" />
@@ -179,6 +183,7 @@
     <Compile Include="Models\Enums\Grade.cs" />
     <Compile Include="Models\Instructor.cs" />
     <Compile Include="Models\OfficeAssignment.cs" />
+    <Compile Include="Models\Person.cs" />
     <Compile Include="Models\Student.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\AssignedCourseData.cs" />
@@ -280,6 +285,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202103242013328_ComplexDataModel_2.resx">
       <DependentUpon>202103242013328_ComplexDataModel_2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202104021139008_Inheritance.resx">
+      <DependentUpon>202104021139008_Inheritance.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
