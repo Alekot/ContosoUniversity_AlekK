@@ -14,6 +14,11 @@ namespace ContosoUniversity_AlekK.Controllers
     public class StudentController : Controller
     {
         private SchoolContext db = new SchoolContext();
+        private IStudentRepository studentRepository;
+        public StudentController()
+        {
+            this.studentRepository = new StudentRepository(new SchoolContext());
+        }
 
         // GET: Student
         public ActionResult Index(string sortOrder, string currentFilter, string searchString, int? page)
@@ -32,7 +37,7 @@ namespace ContosoUniversity_AlekK.Controllers
 
             ViewBag.CurrentFilter = searchString;
 
-            var students = from s in db.Students
+            var students = from s in studentRepository.GetStudents() //db.Students
                            select s;
             if (!String.IsNullOrEmpty(searchString))
             {
@@ -61,17 +66,17 @@ namespace ContosoUniversity_AlekK.Controllers
         }
 
         // GET: Student/Details/5
-        public ActionResult Details(int? id)
+        public ActionResult Details(int id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Student student = db.Students.Find(id);
-            if (student == null)
-            {
-                return HttpNotFound();
-            }
+            //if (id == null)
+            //{
+            //    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            //}
+            Student student = studentRepository.GetStudentByID(id); //db.Students.Find(id);
+            //if (student == null)
+            //{
+            //    return HttpNotFound();
+            //}
             return View(student);
         }
 
@@ -92,8 +97,10 @@ namespace ContosoUniversity_AlekK.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    db.Students.Add(student);
-                    db.SaveChanges();
+                    //db.Students.Add(student);
+                    //db.SaveChanges();
+                    studentRepository.InsertStudent(student);
+                    studentRepository.Save();
                     return RedirectToAction("Index");
                 }
             }
@@ -113,7 +120,9 @@ namespace ContosoUniversity_AlekK.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Student student = db.Students.Find(id);
+            //Student student = db.Students.Find(id);
+            int idInt = Convert.ToInt32(id);
+            Student student = studentRepository.GetStudentByID(idInt);
             if (student == null)
             {
                 return HttpNotFound();
@@ -130,12 +139,15 @@ namespace ContosoUniversity_AlekK.Controllers
         {
             if (id == null)
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            var studentToUpdate = db.Students.Find(id);
+            //var studentToUpdate = db.Students.Find(id);
+            int idInt = Convert.ToInt32(id);
+            var studentToUpdate = studentRepository.GetStudentByID(idInt);
             if (TryUpdateModel(studentToUpdate, "", new string[] { "LastName", "FirstMidName", "EnrollmentDate" }))
             {
                 try
                 {
-                    db.SaveChanges();
+                    //db.SaveChanges();
+                    studentRepository.Save();
 
                     return RedirectToAction("Index");
                 }
@@ -164,7 +176,9 @@ namespace ContosoUniversity_AlekK.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Student student = db.Students.Find(id);
+            //Student student = db.Students.Find(id);
+            int idInt = Convert.ToInt32(id);
+            Student student = studentRepository.GetStudentByID(idInt);
             if (student == null)
             {
                 return HttpNotFound();
@@ -180,10 +194,13 @@ namespace ContosoUniversity_AlekK.Controllers
             try
             {
                 //Student student = db.Students.Find(id);
-                Student student = new Student { ID = id };
                 //db.Students.Remove(student);
-                db.Entry(student).State = EntityState.Deleted;
-                db.SaveChanges();
+
+                //Student student = new Student { ID = id };
+                //db.Entry(student).State = EntityState.Deleted;
+                //db.SaveChanges();
+                studentRepository.DeleteStudent(id);
+                studentRepository.Save();
             }
             catch (System.Data.DataException)
             {
@@ -197,7 +214,7 @@ namespace ContosoUniversity_AlekK.Controllers
         {
             if (disposing)
             {
-                db.Dispose();
+                studentRepository.Dispose();
             }
             base.Dispose(disposing);
         }

@@ -14,11 +14,13 @@ namespace ContosoUniversity_AlekK.Controllers
     public class CourseController : Controller
     {
         private SchoolContext db = new SchoolContext();
+        private UnitOfWork UnitOfWork = new UnitOfWork();
 
         // GET: Course
         public ActionResult Index()
         {
-            var courses = db.Courses.Include(d => d.Department);
+            //var courses = db.Courses.Include(d => d.Department);
+            var courses = UnitOfWork.CourseDepository.Get(includeProperties: "Department");
             return View(courses.ToList());
         }
 
@@ -29,7 +31,8 @@ namespace ContosoUniversity_AlekK.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Course course = db.Courses.Find(id);
+            //Course course = db.Courses.Find(id);
+            Course course = UnitOfWork.CourseDepository.GetByID(id);
             if (course == null)
             {
                 return HttpNotFound();
@@ -48,9 +51,11 @@ namespace ContosoUniversity_AlekK.Controllers
 
         private void PopulateDepartmentsDropDownList(object selectedDepartment = null)
         {
-            var departmentsQuery = from d in db.Departments
-                                   orderby d.Name
-                                   select d;
+            var departmentsQuery = UnitOfWork.DepartmentRepository.Get(
+                                            orderBy: q => q.OrderBy(d => d.Name)); 
+                                   //from d in db.Departments
+                                   //orderby d.Name
+                                   //select d;
             ViewBag.DepartmentID = new SelectList(departmentsQuery, "DepartmentID", "Name", selectedDepartment);
         }
 
@@ -65,8 +70,10 @@ namespace ContosoUniversity_AlekK.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    db.Courses.Add(course);
-                    db.SaveChanges();
+                    //db.Courses.Add(course);
+                    UnitOfWork.CourseDepository.Insert(course);
+                    //db.SaveChanges();
+                    UnitOfWork.Save();
                     return RedirectToAction("Index");
                 }
             }
@@ -89,7 +96,8 @@ namespace ContosoUniversity_AlekK.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Course course = db.Courses.Find(id);
+            //Course course = db.Courses.Find(id);
+            Course course = UnitOfWork.CourseDepository.GetByID(id);
             if (course == null)
             {
                 return HttpNotFound();
@@ -118,12 +126,14 @@ namespace ContosoUniversity_AlekK.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            var courseToUpdate = db.Courses.Find(id);
+            //var courseToUpdate = db.Courses.Find(id);
+            var courseToUpdate = UnitOfWork.CourseDepository.GetByID(id);
             if (TryUpdateModel(courseToUpdate, "", new string[] { "Title", "Credits", "DepartmentID" }))
             {
                 try
                 {
-                    db.SaveChanges();
+                    //db.SaveChanges();
+                    UnitOfWork.Save();
                     return RedirectToAction("Index");
                 }
                 catch (RetryLimitExceededException /*dex*/)
@@ -143,7 +153,8 @@ namespace ContosoUniversity_AlekK.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Course course = db.Courses.Find(id);
+            //Course course = db.Courses.Find(id);
+            Course course = UnitOfWork.CourseDepository.GetByID(id);
             if (course == null)
             {
                 return HttpNotFound();
@@ -156,9 +167,12 @@ namespace ContosoUniversity_AlekK.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Course course = db.Courses.Find(id);
-            db.Courses.Remove(course);
-            db.SaveChanges();
+            //Course course = db.Courses.Find(id);
+            Course course = UnitOfWork.CourseDepository.GetByID(id);
+            //db.Courses.Remove(course);
+            UnitOfWork.CourseDepository.Delete(course);
+            //db.SaveChanges();
+            UnitOfWork.Save();
             return RedirectToAction("Index");
         }
 
@@ -166,7 +180,8 @@ namespace ContosoUniversity_AlekK.Controllers
         {
             if (disposing)
             {
-                db.Dispose();
+                //db.Dispose();
+                UnitOfWork.Dispose();
             }
             base.Dispose(disposing);
         }
